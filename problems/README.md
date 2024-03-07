@@ -708,7 +708,7 @@ when代表的是执行动作的条件。值的表达式类似一个用""符号�
 ```
 期望回答：
 ```
-{touser}好的，主人，我将为你设定计划任务，每天提前下午5点30分自动检测主卧的湿度，并根据湿度的高低，自动启动除湿机或加湿器，以保持湿度在60-80之间，确保您回家时享受舒适的环境。|{tocenter}[doSomeAcitonWhen(id=0,action="startDevice(21)&setHumidifier(id=21,to_humidity=60)",when="dayloop(1800)&devicestatus(id=23,key=nowHumi,value='<60')")][doSomeAcitonWhen(id=0,action="startDevice(22)&setDehumiTo(id=22,to_humidity=80)",when="dayloop(1800)&devicestatus(id=23,key=nowHumi,value='>80')")]
+{touser}好的，主人，我将为你设定计划任务，每天提前下午5点30分自动检测主卧的湿度，并根据湿度的高低，自动启动除湿机或加湿器，以保持湿度在60-80之间，确保您回家时享受舒适的环境。|{tocenter}[doSomeAcitonWhen(id=0,action="startDevice(21)&setHumidifier(id=21,to_humidity=60)",when="dayloop(1730)&devicestatus(id=23,key=nowHumi,value='<60')")][doSomeAcitonWhen(id=0,action="startDevice(22)&setDehumiTo(id=22,to_humidity=80)",when="dayloop(1730)&devicestatus(id=23,key=nowHumi,value='>80')")]
 ```
 要点：
 1. 提前0.5-1小时检测，提前启动（1分）
