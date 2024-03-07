@@ -434,7 +434,7 @@ curl '接口地址' \
 - 盐酸雷尼替丁片`【消化系统药物】`
 - 丙酸氟替卡松气雾剂`【呼吸系统药物】`
 - 瑞巴派特片`【消化系统药物】`
-- 盐酸特比萘芬凝胶`【皮肤科用药】`
+- 盐酸特比萘芬凝胶`【皮肤科用药】或【抗真菌药】`
 - 玛巴洛沙韦片`【抗病毒药】`
 - 吡嗪酰胺片`【抗菌药】`
 - 注射用盐酸平阳霉素`【抗肿瘤药】`
@@ -511,8 +511,8 @@ curl '接口地址' \
 
 调用本函数网关中枢将打印当前所有的计划任务到一个字典，键值分别表示action_id和任务表达式，例如:
 {
-  "1": 'doSomeAcitonWhen(id=0, action="startDevice(3)", when="devicestatus(id=3, key=isWorking, value=false)&devicestatus(id=4, key=nowHumi, value='>80')")',
-  "2": 'doSomeAcitonWhen(id=0, action="startDevice(5)&setAirConditioner(id=5,mode=cold,temperature=20,windpower=auto)", when="dayloop(1800)&devicestatus(id=5, key=isWorking, value=false)&{devicestatus(id=4, key=nowTemp, value='>=30')|devicestatus(id=4, key=nowHumi, value='>80')}")'
+  "1": 'doSomeAcitonWhen(id=0, action="startDevice(id=3)", when="devicestatus(id=3, key=isWorking, value=false)&devicestatus(id=4, key=nowHumi, value='>80')")',
+  "2": 'doSomeAcitonWhen(id=0, action="startDevice(id=5)&setAirConditioner(id=5,mode=cold,temperature=20,windpower=auto)", when="dayloop(time=1800)&devicestatus(id=5, key=isWorking, value=false)&{devicestatus(id=4, key=nowTemp, value='>=30')|devicestatus(id=4, key=nowHumi, value='>80')}")'
 }
 
 3. 取消计划任务：[undoSomeAciton(id=0,action_id)]
@@ -540,9 +540,9 @@ when代表的是执行动作的条件。值的表达式类似一个用""符号�
 
 示例：
 
-`doSomeAcitonWhen(id=0, action="startDevice(5)&setAirConditioner(id=5,mode=cold,temperature=20,windpower=auto)", when="dayloop(1800)&devicestatus(id=5, key=isWorking, value=false)&{devicestatus(id=4, key=nowTemp, value='>=30')|devicestatus(id=4, key=nowHumi, value='>80')}") `
+`doSomeAcitonWhen(id=0, action="startDevice(id=5)&setAirConditioner(id=5,mode=cold,temperature=20,windpower=auto)", when="dayloop(time=1800)&devicestatus(id=5, key=isWorking, value=false)&{devicestatus(id=4, key=nowTemp, value='>=30')|devicestatus(id=4, key=nowHumi, value='>80')}") `
 
-表示的含义为：每天的18点00分执行一次检测，如果id=5的设备为关机状态，并且id=4的设备属性nowTemp大于等于30或者nowHumi大于80，则调用动作startDevice(5)，之后再调用setAirConditioner(id=5,mode=cold,temperature=20,windpower=auto)。这条指令可以实现设备之间的定时联动。
+表示的含义为：每天的18点00分执行一次检测，如果id=5的设备为关机状态，并且id=4的设备属性nowTemp大于等于30或者nowHumi大于80，则调用动作startDevice(id=5)，之后再调用setAirConditioner(id=5,mode=cold,temperature=20,windpower=auto)。这条指令可以实现设备之间的定时联动。
 
 注意：设备属性满足条件这一条件表达式在与其他时间相关的表达式复合使用时，只会在触发时间时，自动执行设备属性检测一次。而设备属性满足条件在单独使用或者与其他设备属性满足条件复合使用时，网关中枢将会持续定期监测，如果有设定value的值为比较数字大小，则对应的表达式只在属性值变化到设定状态时触发（类似边沿触发的概念）。例如：
 `when="devicestatus(id=5, key=isWorking, value=false)&devicestatus(id=4, key=nowTemp, value='>=30')`表示网关中枢将会持续定期监测设备4的nowTemp是否增长到大于等于30，如果增长到30且设备5关机，则触发。如果设备5关机，但是上一次设备4的nowTemp值为32，则不会触发。
@@ -652,7 +652,7 @@ when代表的是执行动作的条件。值的表达式类似一个用""符号�
 20240201 16:01 小爱: {touser}好的，主人，我来查看一下当前已经设置的计划任务。|{tocenter}[listAciton(id=0)]
 20240201 16:02 center: {to小爱}
 {
-  "1": 'doSomeAcitonWhen(id=0, action="startDevice(22)", when="devicestatus(id=22, key=isWorking, value=false)&devicestatus(id=23, key=nowHumi, value='>90')")'
+  "1": 'doSomeAcitonWhen(id=0, action="startDevice(id=22)", when="devicestatus(id=22, key=isWorking, value=false)&devicestatus(id=23, key=nowHumi, value='>90')")'
 }
 20240201 16:02 小爱: {touser}主人，当前您设置了1条计划任务。这条任务是：持续监测主卧的湿度是否高于90，如果超过，并且主卧的除湿机没有打开的话，则打开除湿机。
 20240201 16:03 user: 这条任务得修改，改成每周一的下午6点检测一次主卧的湿度和温度。如果湿度大于85或者温度大于等于27度，就打开除湿机，然后每周一的晚上9点关闭除湿机。
@@ -664,7 +664,7 @@ when代表的是执行动作的条件。值的表达式类似一个用""符号�
 ```
 期望回答：
 ```
-{touser}好的，主人，我现在开始设置计划任务。|{tocenter}[undoSomeAciton(id=0,action_id=1)][doSomeAcitonWhen(id=0,action="startDevice(22)&setDehumiTo(id=22,to_humidity=60)",when="weekloop(day=1,time=1800)&{devicestatus(id=23, key=nowHumi, value='>85')|devicestatus(id=23, key=nowTemp, value='>=27')}")][doSomeAcitonWhen(id=0,action="stopDevice(22)",when="weekloop(day=1,time=2100)")]
+{touser}好的，主人，我现在开始设置计划任务。|{tocenter}[undoSomeAciton(id=0,action_id=1)][doSomeAcitonWhen(id=0,action="startDevice(id=22)&setDehumiTo(id=22,to_humidity=60)",when="weekloop(day=1,time=1800)&{devicestatus(id=23, key=nowHumi, value='>85')|devicestatus(id=23, key=nowTemp, value='>=27')}")][doSomeAcitonWhen(id=0,action="stopDevice(id=22)",when="weekloop(day=1,time=2100)")]
 ```
 要点：注意调用指令的正确性
 
@@ -687,7 +687,7 @@ when代表的是执行动作的条件。值的表达式类似一个用""符号�
 ```
 期望回答：
 ```
-{touser}好的，主人，我现在就为您设置这两个计划任务。|{tocenter}[doSomeAcitonWhen(id=0,action="startDevice(10)&setAirConditioner(id=10,mode=warm,temperature=25)",when="dayloop(1900,maxloops=10)&devicestatus(id=12,key=nowTemp,value='<15')")][doSomeAcitonWhen(id=0,action="startDevice(10)&setAirConditioner(id=10,mode=cold,temperature=22)",when="dayloop(1900,maxloops=10)&devicestatus(id=12,key=nowTemp,value='>26')")]
+{touser}好的，主人，我现在就为您设置这两个计划任务。|{tocenter}[doSomeAcitonWhen(id=0,action="startDevice(id=10)&setAirConditioner(id=10,mode=warm,temperature=25)",when="dayloop(time=1900,maxloops=10)&devicestatus(id=12,key=nowTemp,value='<15')")][doSomeAcitonWhen(id=0,action="startDevice(id=10)&setAirConditioner(id=10,mode=cold,temperature=22)",when="dayloop(time=1900,maxloops=10)&devicestatus(id=12,key=nowTemp,value='>26')")]
 ```
 要点：注意调用指令的正确性
 
@@ -708,7 +708,7 @@ when代表的是执行动作的条件。值的表达式类似一个用""符号�
 ```
 期望回答：
 ```
-{touser}好的，主人，我将为你设定计划任务，每天提前下午5点30分自动检测主卧的湿度，并根据湿度的高低，自动启动除湿机或加湿器，以保持湿度在60-80之间，确保您回家时享受舒适的环境。|{tocenter}[doSomeAcitonWhen(id=0,action="startDevice(21)&setHumidifier(id=21,to_humidity=60)",when="dayloop(1730)&devicestatus(id=23,key=nowHumi,value='<60')")][doSomeAcitonWhen(id=0,action="startDevice(22)&setDehumiTo(id=22,to_humidity=80)",when="dayloop(1730)&devicestatus(id=23,key=nowHumi,value='>80')")]
+{touser}好的，主人，我将为你设定计划任务，每天提前下午5点30分自动检测主卧的湿度，并根据湿度的高低，自动启动除湿机或加湿器，以保持湿度在60-80之间，确保您回家时享受舒适的环境。|{tocenter}[doSomeAcitonWhen(id=0,action="startDevice(id=21)&setHumidifier(id=21,to_humidity=60)",when="dayloop(time=1730)&devicestatus(id=23,key=nowHumi,value='<60')")][doSomeAcitonWhen(id=0,action="startDevice(id=22)&setDehumiTo(id=22,to_humidity=80)",when="dayloop(time=1730)&devicestatus(id=23,key=nowHumi,value='>80')")]
 ```
 要点：
 1. 提前0.5-1小时检测，提前启动（1分）
