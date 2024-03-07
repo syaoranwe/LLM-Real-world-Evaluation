@@ -1,4 +1,4 @@
-# 模型名
+# Claude3-Opus
 
 模型详情说明：调用[Claude官网](https://console.anthropic.com/)的api测试，调用模型：claude3-opus-20240229；Temperature：0.6；最大回复token 2K.
 
