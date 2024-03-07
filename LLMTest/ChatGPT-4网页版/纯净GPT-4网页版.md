@@ -6,7 +6,7 @@
 
 以下为【2024年3月初】测试时的回答及评分
 
-总得分：15+5+9+6+19=54分
+总得分：15+5+9+6+18=53分
 
 ## 数理计算（30分）
 
@@ -358,7 +358,7 @@ if __name__ == "__main__":
 
 ## 现实任务（30分，两题分别20+10分）
 
-### 智能家居Agent 19分
+### 智能家居Agent 18分
 
 4个小问题，每次回答：
 
@@ -390,10 +390,12 @@ if __name__ == "__main__":
 {touser}好的，主人，我将为你设定计划任务，在每天下午6点前检测主卧的湿度，并根据湿度高低自动控制除湿机或加湿器，保持湿度在60-80之间。|{tocenter}[doSomeAcitonWhen(id=0,action="startDevice(21)&setHumidifier(id=21,to_humidity=60)",when="dayloop(1800)&devicestatus(id=23,key=nowHumi,value='<60')")][doSomeAcitonWhen(id=0,action="startDevice(22)&setDehumiTo(id=22,to_humidity=80)",when="dayloop(1800)&devicestatus(id=23,key=nowHumi,value='>80')")]
 ```
 
-4分，因为没有提前检测，-1分
+3分，因为没有提前检测，-1分，目标湿度设置的不好-1
 
 ### 超市货品结算计算
 
 第一遍：所以，晓红爸总共需要支付106.7元。
+
+第一问第二次：苹果1斤：5元/kg × 1 = 5元，... 所以，晓红爸在超市购买这些物品一共需要支付105.7元。
 
 0分
