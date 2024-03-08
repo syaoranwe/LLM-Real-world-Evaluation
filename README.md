@@ -43,4 +43,5 @@
 - Claude3-Opus-20240229 API: 56
 - 纯GPT-4网页版: 53
 - GLM-4带代码执行器网页版: 50
+- Qwen1.5-72B-Chat：33.5
 - chatGPT3.5网页版: 12
