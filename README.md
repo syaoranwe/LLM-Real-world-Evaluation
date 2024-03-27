@@ -40,9 +40,11 @@
 从高到低，模型和分数：
 
 - GPT-4带代码执行器网页版: 69
-- 纯GPT-4网页版: 58
+- 纯GPT-4网页版（背后使用的是GPT-4-Turbo）: 58
 - Claude3-Opus-20240229 API: 49
+- Gemini-1.5-Pro API: 46
 - GLM-4带代码执行器网页版: 45
 - Qwen1.5-72B-Chat：33.5
+- DeepSeek-LLM-67B-chat：13
 - chatGPT3.5网页版: 12
 - Yi-34B-Chat：6.5
