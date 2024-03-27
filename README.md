@@ -45,6 +45,7 @@
 - Gemini-1.5-Pro API: 46
 - GLM-4带代码执行器网页版: 45
 - Qwen1.5-72B-Chat：33.5
+- Claude3-haiku-POE：20.5
 - DeepSeek-LLM-67B-chat：13
 - chatGPT3.5网页版: 12
 - Yi-34B-Chat：6.5
