@@ -41,6 +41,7 @@
 
 - GPT-4带代码执行器网页版: 69
 - 纯GPT-4网页版（背后使用的是GPT-4-Turbo）: 58
+- GPT-4o网页版: 53.5
 - Claude3-Opus-20240229 API: 49
 - Gemini-1.5-Pro API: 46
 - GLM-4带代码执行器网页版: 45
