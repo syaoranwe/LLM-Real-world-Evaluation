@@ -40,6 +40,7 @@
 从高到低，模型和分数：
 
 - GPT-4带代码执行器网页版: 69
+- Claude3.5-sonnet: 64.5
 - 纯GPT-4网页版（背后使用的是GPT-4-Turbo）: 58
 - Qwen2-72B-Instruct：54.5
 - GPT-4o网页版: 53.5
